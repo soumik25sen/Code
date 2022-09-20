@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Importing File') {
+                              steps {
+                                  script{
+                                      withEnv(["filep=${params.FilePath}"])
+                                        echo 'Importing File'
+                                         powershell'''
+                                         $filename="./"+"${env:filep}"
+                                         $automatecpath="C:\\Program Files\\Blue Prism Limited\\Blue Prism Automate\\AutomateC.exe"
+                                        $automatecpath /importrelease $filename /overwrite /user 'admin Infy@2511' /dbconname ProdCon   
+                                        '''
+                                        }
+                                    }
+                                }
+           }
+         }
+
