@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bpr:release xmlns:bpr="http://www.blueprism.co.uk/product/release">
+    <bpr:name>uu</bpr:name>
+    <bpr:release-notes />
+    <bpr:created>2022-09-11 11:53:31Z</bpr:created>
+    <bpr:package-id>1</bpr:package-id>
+    <bpr:package-name>rr</bpr:package-name>
+    <bpr:user-created-by>admin</bpr:user-created-by>
+    <bpr:contents count="2">
+        <process id="779f459e-ab32-404e-82bd-9b6ecb8306c6" name="Demo1" xmlns="http://www.blueprism.co.uk/product/process"><process name="Demo1" version="1.0" bpversion="7.1.1.65484" narrative="" byrefcollection="true"><view><camerax>0</camerax><cameray>0</cameray><zoom version="2">1.25</zoom></view><preconditions /><endpoint narrative="" /><stage stageid="2b0c8a80-9e67-45fc-8bdd-f127f1ea3ccb" name="Start" type="Start"><display x="0" y="-120" /><onsuccess>c9ffb7c6-f11c-4fcf-8c0e-fa4197fc7f1b</onsuccess></stage><stage stageid="4e4508c9-9e11-4b69-955d-03a349134cde" name="End" type="End"><display x="15" y="90" /></stage><stage stageid="224e7d50-5064-4300-9f48-175be7643bae" name="Stage1" type="ProcessInfo"><display x="-195" y="-105" w="150" h="90" /></stage><stage stageid="c9ffb7c6-f11c-4fcf-8c0e-fa4197fc7f1b" name="Calc1" type="Calculation"><loginhibit onsuccess="true" /><display x="0" y="-15" /><onsuccess>4e4508c9-9e11-4b69-955d-03a349134cde</onsuccess><calculation expression="2+1" stage="w" /></stage><stage stageid="861d0ced-a33e-44ce-ab95-114e7b870d9f" name="w" type="Data"><display x="75" y="-15" /><datatype>number</datatype><initialvalue /><private /><alwaysinit /></stage></process></process>
+        <process-group id="14ca5cb4-9e84-42ef-b566-9e97d7303b01" name="Default" isDefaultGroup="True" xmlns="http://www.blueprism.co.uk/product/process-group">
+            <members>
+                <process id="779f459e-ab32-404e-82bd-9b6ecb8306c6" />
+            </members>
+        </process-group>
+    </bpr:contents>
+</bpr:release>
