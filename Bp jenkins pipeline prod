@@ -1,0 +1,90 @@
+Pipeline prod deployment
+————————
+
+pipeline {
+//agent any
+    agent {
+label 'windows-master'
+//label 'Linux_Slave_Node1'
+}
+
+    environment { 
+EMAIL_RECIPIENTS = ''     //comma separated list of email addresses
+    }
+
+    stages { 
+stage('Deploy Blueprism Artefacts') {
+steps {
+script {
+withEnv([
+"buildno=${env.BUILD_NUMBER}",
+"workspace_dir=${env:WORKSPACE}",
+"bpfilePath=${params.filePath}"
+]) { 
+powershell '''
+#Deploy Blueprism Artefacts i.e. Business Objects/Process exports, releases or JSON input for Envrinment Varibles
+Set-Location ${env:workspace_dir}    
+$currpath = Get-Location; Write-Host "Current Working directory: $currpath";
+
+$filename = "./"+"${env:bpfilePath}"    ;Write-Host "File to be deployed: $filename"
+
+$automatec_exe = "C:\\Program Files\\Blue Prism Limited\\Blue Prism Automate\\AutomateC.exe"
+
+#Deploy Blueprism release file
+if ((Test-Path -path $filename)) {
+#Deploy Blueprism release artifacts file (Blueprism Release Package, Process Export or Business Object Export)
+if ($filename.EndsWith(".bprelease") -or $filename.EndsWith(".bprelease`"") -or $filename.EndsWith(".bpprocess") -or $filename.EndsWith(".bpprocess`"") -or $filename.EndsWith(".bpobject") -or $filename.EndsWith(".bpobject`"")) {
+Write-Host "`nImporting Blueprism release package from...: $filename"
+& $automatec_exe /importrelease "$filename" /overwrite /sso /dbconname RPA_BP_PROD
+}
+
+#Update Blueprism Environment Variable
+elseif ($filename.EndsWith("-env.json") -or $filename.EndsWith("-env.json`"")) {
+Write-Host "`nUpdating Blueprism environment variable from input JSON...: $filename"
+#Key-Values of JSON file
+$a=(Get-Content $filename | ConvertFrom-Json)
+foreach ($item in $a) {
+Write-Host "`n`nCreating Environment Variable... ";
+Write-Host "Name: " $item.EVName;
+Write-Host "Data Type: " $item.DataType;
+Write-Host "Value: " $item.Value;
+Write-Host "Description: " $item.Description;
+& $automatec_exe /setev $item.EVName $item.DataType $item.Value $item.Description /overwrite /sso /dbconname RPA_BP_PROD
+}
+}
+else {
+Write-Host "No artifact file found with expected extensions types!"
+}
+}
+else {
+Write-Host "Enter path is not valid!"
+}
+'''
+}
+}
+}
+}
+
+stage('Send Mail') {
+steps {
+script{
+withEnv([ 
+"email_Recipients=$EMAIL_RECIPIENTS"
+]) { 
+echo "Send email Notification: To - ${env:email_Recipients}"
+mail (to: "${env:email_Recipients}", 
+subject: 'Blueprism Artefacts Deployment updated in PROD environment!!!', 
+body: 'Blueprism Artefact Deployment updated in PROD Environment'
+)
+}
+}
+}
+}
+}
+
+post { 
+        always { 
+            cleanWs()
+        }
+    }
+}
