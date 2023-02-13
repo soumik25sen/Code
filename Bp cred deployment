@@ -1,0 +1,68 @@
+pipeline {
+agent {
+label 'windows-master'
+}
+
+parameters {
+string(name: 'bpCredentialName', defaultValue: '', description: 'Blueprism Credential Name')
+string(name: 'bpCredentialPropertyName', defaultValue: '', description: 'Blueprism Credential - Property Name')
+string(name: 'bpCredentialPropertyValue', defaultValue: '', description: 'Blueprism Credential - Property Value')
+choice(name: 'bpEnvironment', choices: ['UAT', 'PROD'], description: 'Blueprism Environment - Create or Update Credential in Blueprism UAT or PROD ')
+}
+
+stages {
+stage('Set Blueprism Credentials Property') {
+steps {
+script {
+withEnv([
+"bpCredentialName=${params.bpCredentialName}",
+"bpCredentialPropertyName=${params.bpCredentialPropertyName}",
+"bpCredentialPropertyValue=${params.bpCredentialPropertyValue}",
+"bpEnvironment=${params.bpEnvironment}"
+]) {
+powershell '''
+echo "Set up Blueprism Credential Property"
+#----- Get and Set variable values ------#
+$bpCredentialName = ${env:bpCredentialName}
+$bpCredentialPropertyName = ${env:bpCredentialPropertyName}
+$bpCredentialPropertyValue = ${env:bpCredentialPropertyValue}
+$bpEnvironment = ${env:bpEnvironment}
+
+#----- Credential Property Name/Values to update ------#
+Write-Host "`nEntered Blueprism Credential property details..."
+Write-Host "Credential Name : $bpCredentialName"
+Write-Host "Credential Property Name: $bpCredentialPropertyName"
+Write-Host "Credential Property Value: $bpCredentialPropertyValue"
+Write-Host "Deployment Environment: $bpEnvironment"
+
+
+#----- Set Blueprism DB Connection ------#
+if ($bpEnvironment -eq "UAT") {
+$dbconn = "RPA_BP_UAT"
+}
+elseif ($bpEnvironment -eq "PROD") {
+$dbconn = "RPA_BP_PROD"
+}
+
+#----- Blueprism CLI Tool AutomateC.exe path ---------#
+$automatec_exe = "C:\\Program Files\\Blue Prism Limited\\Blue Prism Automate\\AutomateC.exe"
+
+#----- Update Blueprism Credential property --------#
+if (($bpCredentialPropertyName) -and ($bpCredentialPropertyValue)) {
+try {
+Write-Host "`nSetting Credential Property for Credential: $bpCredentialName"
+& $automatec_exe /setcredentialproperty $bpCredentialName $bpCredentialPropertyName $bpCredentialPropertyValue /sso /dbconname $dbconn
+}
+catch {
+Write-Host "Credential Doesn't exist.... :" ;Write-Host $
+}
+}
+else {
+Write-Host "`nCredential Property Name or Value is empty!!!"
+}
+'''
+}
+}
+}
+}
+}
