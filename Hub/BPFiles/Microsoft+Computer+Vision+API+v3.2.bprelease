@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bpr:release xmlns:bpr="http://www.blueprism.co.uk/product/release">
+  <bpr:name>Microsoft Computer Vision API v3.2</bpr:name>
+  <bpr:release-notes />
+  <bpr:created>2021-10-26 20:20:59Z</bpr:created>
+  <bpr:package-id>95</bpr:package-id>
+  <bpr:package-name>Microsoft Computer Vision API v3.2</bpr:package-name>
+  <bpr:user-created-by>admin</bpr:user-created-by>
+  <bpr:contents count="4">
+    <process id="44eb76fd-0159-4e16-b538-29e55da4c5f6" name="Microsoft Computer Vision API v3.2 Sample Process" xmlns="http://www.blueprism.co.uk/product/process">
+      <process name="Microsoft Computer Vision API v3.2 Sample Process" version="1.0" bpversion="6.9.0.26970" narrative="" byrefcollection="true">
+        <view>
+          <camerax>6</camerax>
+          <cameray>273</cameray>
+          <zoom version="2">1.25</zoom>
+        </view>
+        <preconditions />
+        <endpoint narrative="" />
+        <stage stageid="3b95be04-b0f5-40f8-bdd0-56a73b8105e9" name="Stage1" type="ProcessInfo">
+          <display x="-195" y="-105" w="150" h="90" />
+        </stage>
+        <stage stageid="cda31eaa-dca6-46ad-89ee-342ee159160f" name="Start" type="Start">
+          <display x="15" y="-105" />
+          <onsuccess>cbf9dbb1-b4ed-4019-8068-d000b97532a3</onsuccess>
+        </stage>
+        <stage stageid="9040093f-efb4-4c3c-8765-8e587c9b4ac6" name="End" type="End">
+          <display x="105" y="420" />
+        </stage>
+        <stage stageid="cc1efcd4-14d7-4e8d-b620-b75124403311" name="language" type="Data">
+          <display x="-240" y="105" />
+          <datatype>text</datatype>
+          <initialvalue xml:space="preserve">en</initialvalue>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="7933f331-7c2d-410b-beb6-edca94dc33b0" name="Resource Name" type="Data">
+          <display x="-165" y="105" />
+          <datatype>text</datatype>
+          <initialvalue xml:space="preserve">blueprismvisionapi</initialvalue>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="cbf9dbb1-b4ed-4019-8068-d000b97532a3" name="Image URL" type="Decision">
+          <narrative>Read image URL POST call</narrative>
+          <display x="15" y="-30" />
+          <decision expression="[Image URL or Binary Switch] = 0" />
+          <ontrue>966eca30-f8b2-46dc-b6e2-42b0dd957f34</ontrue>
+          <onfalse>03e9e787-e2ad-4243-a7e2-9438f72fa31d</onfalse>
+        </stage>
+        <stage stageid="4da2c0a0-052c-4e92-be08-aa6690fdf17c" name="End1" type="End">
+          <display x="300" y="-30" />
+        </stage>
+        <stage stageid="03e9e787-e2ad-4243-a7e2-9438f72fa31d" name="Image Binary" type="Decision">
+          <narrative>Read imagine binary POST call</narrative>
+          <display x="195" y="-30" />
+          <decision expression="[Image URL or Binary Switch] = 1" />
+          <ontrue>a0319513-b25b-41ce-94a7-5a0da31d2970</ontrue>
+          <onfalse>4da2c0a0-052c-4e92-be08-aa6690fdf17c</onfalse>
+        </stage>
+        <stage stageid="e3944fac-cd93-4e54-aaf9-4d6461f081d9" name="Image URL or Binary Switch" type="Data">
+          <display x="-195" y="15" w="180" h="60" />
+          <datatype>number</datatype>
+          <initialvalue>1</initialvalue>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="5de17b6e-15e0-4626-a5ed-ca8a3b46dbba" name="Anchor3" type="Anchor">
+          <display x="15" y="150" w="10" h="10" />
+          <onsuccess>11ec9e3f-bf5b-46c8-be38-93cff5435531</onsuccess>
+        </stage>
+        <stage stageid="690dd7b0-62b3-48b9-8da9-46a3c8a734d5" name="Anchor4" type="Anchor">
+          <display x="195" y="150" w="10" h="10" />
+          <onsuccess>11ec9e3f-bf5b-46c8-be38-93cff5435531</onsuccess>
+        </stage>
+        <stage stageid="e873b126-854b-462c-9980-919706b2b613" name="Switch" type="Block">
+          <display x="-300" y="-30" w="210" h="90" />
+          <font family="Segoe UI" size="10" style="Regular" color="FFCC00" />
+        </stage>
+        <stage stageid="61ad218c-8ff0-45a1-bd2b-306d5615a572" name="Parameters" type="Block">
+          <display x="-300" y="75" w="210" h="105" />
+          <font family="Segoe UI" size="10" style="Regular" color="008000" />
+        </stage>
+        <stage stageid="b747d046-e0d7-4e69-b71b-93a0aef7af97" name="Results" type="Block">
+          <display x="-300" y="195" w="210" h="105" />
+          <font family="Segoe UI" size="10" style="Regular" color="0080FF" />
+        </stage>
+        <stage stageid="d0d95c69-792a-41f5-8be9-330bde4e3d6e" name="Response Headers" type="Collection">
+          <display x="-255" y="225" />
+          <datatype>collection</datatype>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="81d53425-baa9-41c0-86bb-ac2cf4da18a3" name="Response Content" type="Data">
+          <display x="-195" y="225" />
+          <datatype>text</datatype>
+          <initialvalue />
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="c96c3d69-db04-4551-bc1e-3c0ff910c2c7" name="Image URL" type="Data">
+          <display x="-240" y="150" />
+          <datatype>text</datatype>
+          <initialvalue />
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="cbe6f31d-e765-4511-9bec-3ba8a11d4fb8" name="Binary Image to Process" type="Data">
+          <display x="-165" y="150" />
+          <datatype>binary</datatype>
+          <initialvalue>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</initialvalue>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="df2581ce-c540-4182-a6c4-5e3332426ba2" name="HTTP Status Code" type="Data">
+          <display x="-195" y="270" />
+          <datatype>text</datatype>
+          <initialvalue />
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="f79d45ec-3e0a-4346-8a8c-93c9beed363c" name="Opertation Location" type="Data">
+          <display x="-135" y="225" />
+          <datatype>text</datatype>
+          <initialvalue />
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="002da867-9d7c-4f67-ad09-af942a3a6c58" name=" Read Results Response" type="Collection">
+          <display x="-255" y="270" />
+          <datatype>collection</datatype>
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="11ec9e3f-bf5b-46c8-be38-93cff5435531" name="Get Operation-Location" type="Action">
+          <loginhibit onsuccess="true" />
+          <narrative>Pull the value of Operation-Location header from the Response Headers collection.</narrative>
+          <display x="105" y="150" />
+          <inputs>
+            <input type="collection" name="Collection" friendlyname="Collection" narrative="The collection to read." expr="[Response Headers]" />
+            <input type="text" name="Field Name" friendlyname="Field Name" narrative="The field within the collection to read." expr="&quot;Column2&quot;" />
+            <input type="number" name="Row Index" friendlyname="Row Index" narrative="The row index within the collection to read from. The index is from 0 to N-1 (where N is the total number of rows in the collection)." expr="0" />
+          </inputs>
+          <outputs>
+            <output type="text" name="Value Read" friendlyname="Value Read" narrative="The value of the requested field as text." stage="Opertation Location" />
+          </outputs>
+          <onsuccess>18a73826-30f5-4bcb-84c0-b934c611dbbe</onsuccess>
+          <resource object="Utility - Collection Manipulation" action="Read Collection Field" />
+        </stage>
+        <stage stageid="18a73826-30f5-4bcb-84c0-b934c611dbbe" name="Find Operation ID in URL" type="Action">
+          <loginhibit onsuccess="true" />
+          <narrative>Get the starting position of the Operation ID within the URL.</narrative>
+          <display x="105" y="210" />
+          <inputs>
+            <input type="text" name="Text" friendlyname="Text" narrative="Text to search in" expr="[Opertation Location]" />
+            <input type="text" name="Search String" friendlyname="Search String" narrative="The text to search for" expr="&quot;/&quot;" />
+            <input type="number" name="Start Byte" friendlyname="Start Byte" narrative="Where in the string to search from" expr="Len([Opertation Location])" />
+            <input type="number" name="Compare Method" friendlyname="Compare Method" narrative="1=text, 0=binary" expr="1" />
+          </inputs>
+          <outputs>
+            <output type="number" name="Position" friendlyname="Position" narrative="The index of the sub text within the text from the end or -1 if not found" stage="Position" />
+          </outputs>
+          <onsuccess>33a9aba1-4c20-4aa2-bd79-e6c97dce6787</onsuccess>
+          <resource object="Utility - Strings" action="InStrRev" />
+        </stage>
+        <stage stageid="65858669-e6ab-4ce1-9a20-26a68cc4a8a8" name="Position" type="Data">
+          <display x="195" y="210" />
+          <datatype>number</datatype>
+          <initialvalue />
+          <private />
+          <alwaysinit />
+        </stage>
+        <stage stageid="33a9aba1-4c20-4aa2-bd79-e6c97dce6787" name="Get the Operation ID Value" type="Calculation">
+          <narrative>Pull the actual Operation ID value out of the URL.</narrative>
+          <display x="105" y="270" />
+          <onsuccess>fdd30f3a-098d-4777-b252-6bcf30160e6c</onsuccess>
+          <calculation expression="Right([Opertation Location], Len([Opertation Location]) - [Position])" stage="Opertation Location" />
+        </stage>
+        <stage stageid="a0319513-b25b-41ce-94a7-5a0da31d2970" name="Microsoft Computer Vision API v3.2::Read: Image" type="Action">
+          <loginhibit onsuccess="true" />
+          <display x="195" y="60" w="90" h="60" />
+          <inputs>
+            <input type="text" name="language" friendlyname="language" expr="" />
+            <input type="text" name="Resource Endpoint" friendlyname="Resource Endpoint" expr="" />
+            <input type="text" name="Microsoft Computer Vision API Credential Name" friendlyname="Microsoft Computer Vision API Credential Name" narrative="The name of the Custom credential" expr="" />
+            <input type="text" name="pages" friendlyname="pages" expr="" />
+            <input type="text" name="readingOrder" friendlyname="readingOrder" expr="" />
+            <input type="text" name="model-version " friendlyname="model-version " expr="" />
+            <input type="binary" name="Binary Image to Process" friendlyname="Binary Image to Process" narrative="The file collection to send in the Web API Request" expr="" />
+          </inputs>
+          <outputs>
+            <output type="text" name="Response Content" friendlyname="Response Content" stage="" />
+            <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="" />
+            <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="" />
+          </outputs>
+          <onsuccess>690dd7b0-62b3-48b9-8da9-46a3c8a734d5</onsuccess>
+          <resource object="Microsoft Computer Vision API v3.2" action="Read: Image" />
+        </stage>
+        <stage stageid="966eca30-f8b2-46dc-b6e2-42b0dd957f34" name="Microsoft Computer Vision API v3.2::Read: URL" type="Action">
+          <loginhibit onsuccess="true" />
+          <display x="15" y="60" w="90" h="60" />
+          <inputs>
+            <input type="text" name="language" friendlyname="language" expr="" />
+            <input type="text" name="model-version" friendlyname="model-version" expr="" />
+            <input type="text" name="Resource Endpoint" friendlyname="Resource Endpoint" expr="" />
+            <input type="text" name="Microsoft Computer Vision API Credential Name" friendlyname="Microsoft Computer Vision API Credential Name" narrative="The name of the Custom credential" expr="" />
+            <input type="text" name="pages" friendlyname="pages" expr="" />
+            <input type="text" name="readingOrder" friendlyname="readingOrder" expr="" />
+            <input type="text" name="imageURL" friendlyname="imageURL" expr="" />
+          </inputs>
+          <outputs>
+            <output type="text" name="Response Content" friendlyname="Response Content" stage="" />
+            <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="" />
+            <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="" />
+          </outputs>
+          <onsuccess>5de17b6e-15e0-4626-a5ed-ca8a3b46dbba</onsuccess>
+          <resource object="Microsoft Computer Vision API v3.2" action="Read: URL" />
+        </stage>
+        <stage stageid="fdd30f3a-098d-4777-b252-6bcf30160e6c" name="Microsoft Computer Vision API v3.2::Get Read Result" type="Action">
+          <loginhibit onsuccess="true" />
+          <display x="105" y="345" w="90" h="60" />
+          <inputs>
+            <input type="text" name="Resource Endpoint" friendlyname="Resource Endpoint" expr="" />
+            <input type="text" name="Microsoft Computer Vision API Credential Name" friendlyname="Microsoft Computer Vision API Credential Name" narrative="The name of the Custom credential" expr="" />
+            <input type="text" name="operationId" friendlyname="operationId" expr="" />
+          </inputs>
+          <outputs>
+            <output type="text" name="Response Content" friendlyname="Response Content" stage="" />
+            <output type="text" name="HTTP Status Code" friendlyname="HTTP Status Code" stage="" />
+            <output type="collection" name="Response Headers" friendlyname="Response Headers" stage="" />
+            <output type="collection" name="Read Result" friendlyname="Read Result" stage="" />
+          </outputs>
+          <onsuccess>9040093f-efb4-4c3c-8765-8e587c9b4ac6</onsuccess>
+          <resource object="Microsoft Computer Vision API v3.2" action="Get Read Result" />
+        </stage>
+        <stage stageid="9cf03f2e-87fb-4a29-adf5-95b0551cc78d" name="Blue Prism Limited Copyright Note" type="Note" xmlns="">
+          <loginhibit />
+          <narrative>'The MIT License'
+
+© 2021 Blue Prism Limited
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE</narrative>
+          <display x="-510" y="-45" w="450" h="210" />
+          <font family="Segoe UI" size="10" style="Bold" color="000000" />
+        </stage>
+      </process>
+    </process>
+    <credential id="ff23e082-bf88-48d2-8b69-ba7f37a4af98" name="Microsoft Computer Vision v3.2" xmlns="http://www.blueprism.co.uk/product/credential">
+      <description>API Key for Microsoft Computer Vision v3.2 connector.</description>
+      <credentialType>BearerToken</credentialType>
+      <members>
+        <process id="44eb76fd-0159-4e16-b538-29e55da4c5f6" />
+      </members>
+    </credential>
+    <webapiservice id="7c282081-50af-4a6c-9a8e-e8665bf5ea52" name="Microsoft Computer Vision API v3.2" enabled="true" xmlns="http://www.blueprism.co.uk/product/webapiservice">
+      <configuration baseurl="https://[Resource Endpoint].cognitiveservices.azure.com/" xmlns="">
+        <actions>
+          <action id="876" name="Analyze Image: Image" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation extracts a rich set of visual features based on the image content.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/analyze?visualFeatures=[visualFeatures]&amp;details=[details]&amp;language=[language]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/octet-stream" />
+              </headers>
+              <bodycontent type="2" fileinputparametername="Image to Analyze" />
+            </request>
+            <parameters>
+              <actionparameter name="visualFeatures" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="details" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.categories" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="875" name="Analyze Image: URL" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation extracts a rich set of visual features based on the image content.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/analyze?visualFeatures=[visualFeatures]&amp;details=[details]&amp;language=[language]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="1">
+                <template><![CDATA[{"url":"[imageURL]"}]]></template>
+              </bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="visualFeatures" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="details" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="imageURL" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.categories" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="877" name="Batch (Internal)" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[]]></description>
+            <request httpmethod="PUT" urlpath="vision/v3.2/batch/analyze/[name]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="0"></bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="name" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Batch Response" path="$" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="879" name="Describe Image: Image" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation generates a description of an image in human readable language with complete sentences.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/describe?maxCandidates=[maxCandidates]&amp;language=[langugage]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/octet-stream" />
+              </headers>
+              <bodycontent type="2" fileinputparametername="Image to Analyze" />
+            </request>
+            <parameters>
+              <actionparameter name="maxCandidates" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.description" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="878" name="Describe Image: URL" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation generates a description of an image in human readable language with complete sentences.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/describe?maxCandidates=[maxCandidates]&amp;language=[langugage]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="1">
+                <template><![CDATA[{"url":"[ImageURL]"}]]></template>
+              </bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="maxCandidates" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="imageURL" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.description" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="881" name="Detect Objects: Image" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation Performs object detection on the specified image.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/detect?model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/octet-stream" />
+              </headers>
+              <bodycontent type="2" fileinputparametername="Image to Analyze" />
+            </request>
+            <parameters>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.objects" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="880" name="Detect Objects: URL" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation Performs object detection on the specified image.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/detect?model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="1">
+                <template><![CDATA[{"url":"[ImageURL]"}]]></template>
+              </bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.objects" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="883" name="Get Area of Interest: Image" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation returns a bounding box around the most important area of the image.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/areaOfInterest?model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/octet-stream" />
+              </headers>
+              <bodycontent type="2" fileinputparametername="Image to Analyze" />
+            </request>
+            <parameters>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.areaOfInterest" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="882" name="Get Area of Interest: URL" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[This operation returns a bounding box around the most important area of the image.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/areaOfInterest?model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="1">
+                <template><![CDATA[{"url":"[ImageURL]"}]]></template>
+              </bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$.areaOfInterest" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="884" name="Get Batch (Internal)" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[]]></description>
+            <request httpmethod="GET" urlpath="vision/v3.2/batch/analyzeStatus/[name]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="0"></bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="name" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Batch Response" path="$" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="885" name="Get Batch List (Internal)" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[]]></description>
+            <request httpmethod="GET" urlpath="vision/v3.2/batch/analyze">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="0"></bodycontent>
+            </request>
+            <parameters />
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Batch Response" path="$" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="886" name="Get Read Result" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[Use this operation to retrieve the status and OCR result of a Read operation. ]]></description>
+            <request httpmethod="GET" urlpath="vision/v3.2/read/analyzeResults/[operationId]">
+              <headers />
+              <bodycontent type="0"></bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="operationId" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Read Result" path="$.readResults" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="888" name="OCR: Image" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[Optical Character Recognition (OCR) detects text in an image and extracts the recognized characters into a machine-usable character stream.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/ocr?language=[language]&amp;detectOrientation=[detectOrientation]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/octet-stream" />
+              </headers>
+              <bodycontent type="2" fileinputparametername="Image to Analyze" />
+            </request>
+            <parameters>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="detectOrientation" expose="true" datatype="8">
+                <initialvalue><![CDATA[True]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="887" name="OCR: URL" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[Optical Character Recognition (OCR) detects text in an image and extracts the recognized characters into a machine-usable character stream.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/ocr?language=[language]&amp;detectOrientation=[detectOrientation]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="1">
+                <template><![CDATA[{"url":"[ImageURL]"}]]></template>
+              </bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="detectOrientation" expose="true" datatype="8">
+                <initialvalue><![CDATA[True]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="imageURL" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters>
+                <customoutputparameter type="JsonPath" name="Analyzed Image" path="$" datatype="collection"></customoutputparameter>
+              </parameters>
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="890" name="Read: Image" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[Use this call to perform a Read operation. The Read API is optimized for text-heavy images and multi-page, mixed language, and mixed type documents. The Read operation executes asynchronously.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/read/analyze?language=[language]&amp;pages=[pages]&amp;readingOrder=[readingOrder]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/octet-stream" />
+              </headers>
+              <bodycontent type="2" fileinputparametername="Binary Image to Process" />
+            </request>
+            <parameters>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="pages" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="readingOrder" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version " expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters />
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+          <action id="889" name="Read: URL" enabled="true" enableRequestOutputParameter="false" disableSendingOfRequest="false">
+            <description><![CDATA[Use this call to perform a Read operation. The Read API is optimized for text-heavy images and multi-page, mixed language, and mixed type documents. The Read operation executes asynchronously.]]></description>
+            <request httpmethod="POST" urlpath="vision/v3.2/read/analyze?language=[language]&amp;pages=[pages]&amp;readingOrder=[readingOrder]&amp;model-version=[model-version]">
+              <headers>
+                <httpheader name="Content-Type" value="application/json" />
+              </headers>
+              <bodycontent type="1">
+                <template><![CDATA[{"url":"[ImageURL]"}]]></template>
+              </bodycontent>
+            </request>
+            <parameters>
+              <actionparameter name="language" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="pages" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="readingOrder" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="model-version" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+              <actionparameter name="imageURL" expose="true" datatype="64">
+                <initialvalue><![CDATA[]]></initialvalue>
+                <description><![CDATA[]]></description>
+              </actionparameter>
+            </parameters>
+            <outputparameters>
+              <parameters />
+              <code><![CDATA[]]></code>
+            </outputparameters>
+          </action>
+        </actions>
+        <commonparameters>
+          <actionparameter name="Resource Endpoint" expose="true" datatype="64">
+            <initialvalue><![CDATA[]]></initialvalue>
+            <description><![CDATA[]]></description>
+          </actionparameter>
+        </commonparameters>
+        <commonheaders>
+          <httpheader name="Ocp-Apim-Subscription-Key" value="[Credential.Password]" />
+        </commonheaders>
+        <commonauthentications>
+          <authentication type="6">
+            <credential credentialname="Microsoft Computer Vision v3.2" exposetoprocess="true" inputparametername="Microsoft Computer Vision API Credential Name" />
+          </authentication>
+        </commonauthentications>
+        <commoncode>
+          <codeproperties code="&#xD;&#xA;' 'The MIT License'&#xD;&#xA;&#xD;&#xA;' © 2021 Blue Prism Limited&#xD;&#xA;&#xD;&#xA;' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:&#xD;&#xA;&#xD;&#xA;' The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&#xD;&#xA;&#xD;&#xA;' THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE&#xD;&#xA;&#xD;&#xA;' 'The MIT License'&#xD;&#xA;&#xD;&#xA;' © 2021 Blue Prism Limited&#xD;&#xA;&#xD;&#xA;' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:&#xD;&#xA;&#xD;&#xA;' The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.&#xD;&#xA;&#xD;&#xA;' THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE&#xD;&#xA;" language="visualbasic">
+            <namespaces>
+              <namespace>System</namespace>
+              <namespace>System.Drawing</namespace>
+              <namespace>System.Data</namespace>
+            </namespaces>
+            <references>
+              <reference>System.dll</reference>
+              <reference>System.Data.dll</reference>
+              <reference>System.Xml.dll</reference>
+              <reference>System.Drawing.dll</reference>
+            </references>
+          </codeproperties>
+        </commoncode>
+        <configurationsettings>
+          <configurationsettings requesttimeout="10" authserverrequesttimeout="10" />
+        </configurationsettings>
+      </configuration>
+    </webapiservice>
+    <process-group id="7287e7a2-ab65-482b-8161-82218a6c7c8d" name="Default" isDefaultGroup="True" xmlns="http://www.blueprism.co.uk/product/process-group">
+      <members>
+        <process id="44eb76fd-0159-4e16-b538-29e55da4c5f6" />
+      </members>
+    </process-group>
+  </bpr:contents>
+</bpr:release>
